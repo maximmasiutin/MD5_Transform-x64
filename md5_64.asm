@@ -10,7 +10,7 @@
 ; througout the routine.
 
 ; To operate with 32-bit values store in higher bits
-; of a 64-bit register (bits 32-63) uses "Ror" by 32
+; of a 64-bit register (bits 32-63) uses "Ror" by 32;
 ; 8 macro variables (M1-M8) are used to keep record
 ; or corrent state of whether the register has been
 ; Ror'ed or not.
