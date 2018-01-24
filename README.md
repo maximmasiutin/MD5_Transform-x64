@@ -2,11 +2,13 @@
 MD5 transform routine oprimized for x64 processors written using Macro Assembler
 
 Copyright 2018 Ritlabs, SRL
-written by Maxim Masiutin <max@ritlabs.com>
+The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
 
-Loads 64 bytes of MD5 state into 8 64-bit registers 
-(RBP, R8, R9, R10, R11, R12, R13, R14)
-to avoid excessive memory load operations.
+The main advantage of this 64-bit version is that
+it loads 64 bytes of hashed message into 8 64-bit registers 
+(RBP, R8, R9, R10, R11, R12, R13, R14) at the beginning,
+to avoid excessive memory load operations 
+througout the routine.
 
 To operate with 32-bit values store in higher bits
 of a 64-bit register (bits 32-63) uses "Ror" by 32
