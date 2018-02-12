@@ -16,11 +16,11 @@
 ; or current state of whether the register has been
 ; Ror'ed or not.
 
-; It also has an ability to use Lea instruction instead
-; of two sequental Adds (uncomment UseLea=1), but it is 
+; It also has an ability to use LEA instruction instead
+; of two sequental ADDs (uncomment UseLea=1), but it is 
 ; slower on Skylake processors. Also, Intel in the 
-; Optimization Reference Maual discourages us of
-; Lea as a replacement of two adds, since it is slower 
+; Optimization Reference Maual discourages use of
+; LEA as a replacement of two ADDs, since it is slower 
 ; on the Atom processors.
 
 ; MD5_Transform-x64 is released under a dual license, 
