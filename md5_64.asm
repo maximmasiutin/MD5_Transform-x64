@@ -2,6 +2,7 @@
 ; MD5 transform routine oprimized for x64 processors
 ; Copyright 2018 Ritlabs, SRL
 ; The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
+; Based on code by Peter Sawatzki (see below).
 
 ; The main advantage of this 64-bit version is that
 ; it loads 64 bytes of hashed message into 8 64-bit registers 
@@ -12,7 +13,7 @@
 ; To operate with 32-bit values store in higher bits
 ; of a 64-bit register (bits 32-63) uses "Ror" by 32;
 ; 8 macro variables (M1-M8) are used to keep record
-; or corrent state of whether the register has been
+; or current state of whether the register has been
 ; Ror'ed or not.
 
 ; It also has an ability to use Lea instruction instead
