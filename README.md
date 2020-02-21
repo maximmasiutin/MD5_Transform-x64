@@ -2,7 +2,9 @@
 MD5 transform routine oprimized for x64 processors written using Macro Assembler
 
 Copyright 2018 Ritlabs, SRL
+
 The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
+
 Based on code by Peter Sawatzki (see below).
 
 The main advantage of this 64-bit version is that
@@ -23,6 +25,9 @@ slower on Skylake processors. Also, Intel in the
 Optimization Reference Maual discourages use of
 LEA as a replacement of two ADDs, since it is slower 
 on the Atom processors.
+
+This code is used in "The Bat!" email client
+https://www.ritlabs.com/en/products/thebat/
 
 MD5_Transform-x64 is released under a dual license, 
 and you may choose to use it under either the 
