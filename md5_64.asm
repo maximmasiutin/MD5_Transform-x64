@@ -1,5 +1,5 @@
 ; MD5_Transform-x64
-; MD5 transform routine oprimized for x64 processors
+; MD5 transform routine oprimized for x86-64 processors
 ; Copyright 2018 Ritlabs, SRL
 ; The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
 ; Based on code by Peter Sawatzki (see below).

@@ -1,5 +1,5 @@
 # MD5_Transform-x64
-MD5 transform routine oprimized for x64 processors written using Macro Assembler
+MD5 transform routine oprimized for x86-64 processors written using Macro Assembler
 
 Copyright 2018 Ritlabs, SRL
 
