@@ -1,5 +1,5 @@
 ; MD5_Transform-x64
-; MD5 transform routine oprimized for x86-64 processors
+; MD5 transform routine optimized for x86-64 processors
 ; Copyright 2018 Ritlabs, SRL
 ; The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
 ; Based on code by Peter Sawatzki (see below).
@@ -10,7 +10,7 @@
 ; it loads 64 bytes of hashed message into 8 64-bit registers 
 ; (RBP, R8, R9, R10, R11, R12, R13, R14) at the beginning,
 ; to avoid excessive memory load operations 
-; througout the routine.
+; throughout the routine.
 
 ; To operate with 32-bit values store in higher bits
 ; of a 64-bit register (bits 32-63) uses "Ror" by 32;
@@ -19,9 +19,9 @@
 ; Ror'ed or not.
 
 ; It also has an ability to use LEA instruction instead
-; of two sequental ADDs (uncomment UseLea=1), but it is 
+; of two sequential ADDs (uncomment UseLea=1), but it is 
 ; slower on Skylake processors. Also, Intel in the 
-; Optimization Reference Maual discourages use of
+; Optimization Reference Manual discourages use of
 ; LEA as a replacement of two ADDs, since it is slower 
 ; on the Atom processors.
 
