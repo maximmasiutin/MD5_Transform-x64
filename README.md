@@ -1,9 +1,11 @@
 # MD5_Transform-x64
 MD5 transform routine optimized for x86-64 processors written using Macro Assembler
 
-Copyright 2018 Ritlabs, SRL
+Copyright (C) 2018-2020 Ritlabs, SRL. All rights reserved.
 
-The 64-bit version is written by Maxim Masiutin <max@ritlabs.com>
+Copyright (C) 2020 Maxim Masiutin. All rights reserved.
+
+The 64-bit version is written by Maxim Masiutin <maxim.masiutin@gmail.com>
 
 Based on code by Peter Sawatzki (see below).
 
