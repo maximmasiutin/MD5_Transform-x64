@@ -3,18 +3,18 @@ MD5 transform routine optimized for x86-64 processors written using Macro Assemb
 
 Copyright (C) 2018-2020 Ritlabs, SRL. All rights reserved.
 
-Copyright (C) 2020 Maxim Masiutin. All rights reserved.
+Copyright (C) 2020-2021 Maxim Masiutin. All rights reserved.
 
-The 64-bit version is written by Maxim Masiutin <maxim.masiutin@gmail.com>
+The 64-bit version is written by Maxim Masiutin <maxim@masiutin.com>
 
 Based on code by Peter Sawatzki (see below).
 
 The performance is 4.94 CPU cycles per byte (on Skylake).
 
 The main advantage of this 64-bit version is that
-it loads 64 bytes of hashed message into 8 64-bit registers 
+it loads 64 bytes of hashed message into 8 64-bit registers
 (RBP, R8, R9, R10, R11, R12, R13, R14) at the beginning,
-to avoid excessive memory load operations 
+to avoid excessive memory load operations
 throughout the routine.
 
 To operate with 32-bit values store in higher bits
@@ -24,25 +24,25 @@ or current state of whether the register has been
 Ror'ed or not.
 
 It also has an ability to use LEA instruction instead
-of two sequential ADDs (uncomment UseLea=1), but it is 
-slower on Skylake processors. Also, Intel in the 
+of two sequential ADDs (uncomment UseLea=1), but it is
+slower on Skylake processors. Also, Intel in the
 Optimization Reference Manual discourages use of
-LEA as a replacement of two ADDs, since it is slower 
+LEA as a replacement of two ADDs, since it is slower
 on the Atom processors.
 
 This code is used in "The Bat!" email client
 https://www.ritlabs.com/en/products/thebat/
 
-MD5_Transform-x64 is released under a dual license, 
-and you may choose to use it under either the 
+MD5_Transform-x64 is released under a dual license,
+and you may choose to use it under either the
 Mozilla Public License 2.0 (MPL 2.1, available from
-https://www.mozilla.org/en-US/MPL/2.0/) or the 
-GNU Lesser General Public License Version 3, 
+https://www.mozilla.org/en-US/MPL/2.0/) or the
+GNU Lesser General Public License Version 3,
 dated 29 June 2007 (LGPL 3, available from
 https://www.gnu.org/licenses/lgpl.html).
 
-MD5_Transform-x64 is based 
-on the following code by Peter Sawatzki. 
+MD5_Transform-x64 is based
+on the following code by Peter Sawatzki.
 
 The original notice by Peter Sawatzki follows.
 

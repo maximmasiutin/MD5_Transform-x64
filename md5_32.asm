@@ -20,7 +20,7 @@
 ; calling convention. For more information on this calling convension, see
 ; https://en.wikipedia.org/wiki/X86_calling_conventions#Borland_register
 
-; You can compile this code using Microsoft Macro Assembler 
+; You can compile this code using Microsoft Macro Assembler
 ;     ml.exe /c md5_32.asm
 ; or using Borland Turbo Assembler
 ;     tasm32.exe /m md5_32.asm
@@ -100,7 +100,7 @@ Public MD5_Transform
   Push EBp
 
   Mov EBp, EDx        ; Now EBp holds Message offset
-  Push EAx     
+  Push EAx
   Mov EDx, [EAx+12]
   Mov ECx, [EAx+8]
   Mov EBx, [EAx+4]
@@ -174,7 +174,7 @@ Public MD5_Transform
   II ECx,EDx,EAx,EBx,  2, 15, 02ad7d2bbh  ; 63
   II EBx,ECx,EDx,EAx,  9, 21, 0eb86d391h  ; 64
 
-  Pop ESi            
+  Pop ESi
   Add [ESi],    EAx
   Add [ESi+4],  EBx
   Add [ESi+8],  ECx
