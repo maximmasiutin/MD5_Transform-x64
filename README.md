@@ -7,7 +7,7 @@ Copyright (C) 2020-2021 Maxim Masiutin. All rights reserved.
 
 The 64-bit version is written by Maxim Masiutin <maxim@masiutin.com>
 
-Based on code by Peter Sawatzki (see below).
+Based on 32-bit code by Peter Sawatzki (see below).
 
 The performance is 4.94 CPU cycles per byte (on Skylake).
 
