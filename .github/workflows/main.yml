@@ -1,0 +1,116 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - md5_64.asm
+      - md5_64_nasm.asm
+      - md5_hash.pas
+      - md5_test.pas
+  workflow_dispatch:
+
+env:
+  fpc_ver: '3.2.2'
+
+
+jobs:
+  build_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update apt sources
+        run: sudo apt-get update
+
+      - name: Install Free Pascal and Netwide Assembler
+        run: sudo apt-get install -y fpc nasm
+
+      - name: Compile with nasm
+        run: nasm -f elf64 -dLINUIX_AMD64_ABI md5_64_nasm.asm
+
+      - name: Compile the md5_hash unit
+        run: fpc -Tlinux -Px86_64 -dNASM md5_hash.pas
+
+      - name: Compile the md5_test unit
+        run: fpc -Tlinux -Px86_64 md5_test.pas
+
+      - name: Run the md5_test and verify output
+        run: |
+          output=$(./md5_test)
+          if [ "$output" = "MD5 test passed" ]; then
+            echo "Test passed successfully."
+          else
+            echo "Test failed. Output: $output"
+            exit 1
+          fi
+
+  build_windows:
+    runs-on: windows-latest
+    env:
+      fpc_installer_name: 'fpc_installer'
+      nasm_executable_name: 'C:\Program Files\NASM\nasm.exe'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set environment variables for FPC
+        run: |
+          echo "FPC_PATH=C:\FPC\${{ env.fpc_ver }}\bin\i386-win32\fpc.exe" >> $env:GITHUB_ENV
+          echo "FPC_URL=https://sourceforge.net/projects/freepascal/files/Win32/${{ env.fpc_ver }}/fpc-${{ env.fpc_ver }}.win32.and.win64.exe/download" >> $env:GITHUB_ENV
+          echo "FPC_INSTALLER_PATH=$Env:TEMP\${{ env.fpc_installer_name }}.exe" >> $env:GITHUB_ENV
+
+      - name: Print the environment variables set for FPC
+        run: |
+          gci env: | where name -like 'FPC_*'
+
+      - name: Download FreePascal installer
+        run: |
+          & 'curl.exe' @('--silent', '--no-progress-meter', '--location', '--output', "$Env:FPC_INSTALLER_PATH", "$Env:FPC_URL")
+
+      - name: Install FreePascal silently from the downloaded installer, wait for it to finish, and remove the installer
+        run: |
+          & "$Env:FPC_INSTALLER_PATH" @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/LOG')
+          Wait-Process -Name '${{ env.fpc_installer_name }}' -Timeout 600
+          Remove-Item "$Env:FPC_INSTALLER_PATH"
+
+      - name: Output the FreePascal installation log unless it was successful
+        run: |
+          if (-Not (Test-Path "$Env:FPC_PATH")) {
+            Get-ChildItem -Path "$Env:TEMP\Setup Log *.txt" | ForEach-Object {
+              Write-Host "=== Log file: $($_.FullName) ==="
+              Get-Content -Path $_.FullName
+            }
+          } else {
+            Write-Host "$Env:FPC_PATH exists."
+          }   
+
+      - name: Install Netwide Assembler via Chocolatey
+        run: |
+          & 'choco.exe' @('install', 'nasm', '--yes', '--no-progress', '--limit-output', '--no-color')
+
+      - name: Compile with nasm
+        run: |
+          & '${{ env.nasm_executable_name }}' @('-f', 'win64', '-dWIN64_ABI', 'md5_64_nasm.asm')
+
+      - name: Compile the md5_hash unit
+        run: |
+          & "$Env:FPC_PATH" @('-Twin64', '-Px86_64', '-dNASM', 'md5_hash.pas')
+
+      - name: Compile the fpc_test unit
+        run: |
+          & "$Env:FPC_PATH" @('-Twin64', '-Px86_64', 'md5_test.pas')
+
+      - name: Run md5_test and verify output
+        run: |
+          $output = & "./md5_test.exe"
+          if ($output -eq "MD5 test passed") {
+            Write-Host "Test passed successfully."
+          } else {
+            Write-Error "Test failed. Output: $output"
+          exit 1
+          }
+
