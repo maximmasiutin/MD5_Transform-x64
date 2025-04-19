@@ -16,7 +16,7 @@
 
 
 ; This is a 32-bit version of MD5_Transform
-; modifief by Maxim Masiutin for Borland 32-bit "register"
+; modified by Maxim Masiutin for Borland 32-bit "register"
 ; calling convention. For more information on this calling convension, see
 ; https://en.wikipedia.org/wiki/X86_calling_conventions#Borland_register
 

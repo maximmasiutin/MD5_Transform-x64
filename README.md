@@ -19,7 +19,7 @@ You can also compile the code on Linux or Windows using Netwide Assembler (nasm)
 
 The performance is 4.94 CPU cycles per byte (on Skylake processors).
 
-The main advantage of this 64-bit version is that it loads 64 bytes of the hashed message into 8 64-bit registers (RBP, R8, R9, R10, R11, R12, R13, R14) at the beginning to avoid excessive memory load operations throughout the routine.
+The main advantage of this 64-bit version is that it loads 64 bytes of the hashed message into eight 64-bit registers (RBP, R8, R9, R10, R11, R12, R13, R14) at the beginning to avoid excessive memory load operations throughout the routine.
 
 To operate with 32-bit values stored in the higher bits of a 64-bit register (bits 32-63), it uses the "ROR" (rotate right) instruction to rotate the bits of a 64-bit register by 32 so that the lower 32 and higher 32 bits of the 64-bit register swap, allowing efficient manipulation of these values without additional memory accesses or instructions. Eight macro variables (M1-M8) are used to keep track of whether the register has been rotated or not.
 
@@ -31,6 +31,9 @@ For Unix (Linux), Netwide Assembler (nasm) is used, to assemble the code for "Sy
 
 This code is used in "The Bat!" email client:  
 https://www.ritlabs.com/en/products/thebat/
+
+Additionally, there is support for GNU Assembler (GAS). You can compile the 32-bit code with GAS using `as -msyntax=intel -mnaked-reg --32 -o md5_32_gas.obj md5_32_gas.asm`. There is also a version that uses Intel Advanced Performance Extensions (Intel APX), so that it helps avoid using "ROR", and sixteen 32-bit registers are used for storing the hashed input: `EBP`, `R8d`, `R9d`, `R10d`, `R11d`, `R12d`, `R13d`, `R14d`, `R15d`, `R16d`, `R17d`, `R18d`, `R19d`, `R20d`, `R21d`, `R22d`. As such, the GAS implementation uses additional general-purpose registers (GPRs) also known as Extended GPRs (EGPRs) to implement MD5 transform routine, but doesn't use other APX features, such as three-operand instruction formats. To compile it, call `as -msyntax=intel -mnaked-reg --64 -o md5_64_gas_apx.obj md5_64_gas_apx.asm`.
+
 
 MD5_Transform-x64 is released under a dual license, and you may choose to use it under either the Mozilla Public License 2.0 (MPL 2.1, available from https://www.mozilla.org/en-US/MPL/2.0/) or the GNU Lesser General Public License Version 3, dated 29 June 2007 (LGPL 3, available from https://www.gnu.org/licenses/lgpl.html).
 
