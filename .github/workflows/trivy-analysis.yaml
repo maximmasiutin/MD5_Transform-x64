@@ -1,5 +1,5 @@
 ---
-name: Trivy Analysis
+name: Trivy
 
 permissions:
   contents: read
