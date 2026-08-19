@@ -21,6 +21,8 @@ env:
 jobs:
   build_linux:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -52,6 +54,8 @@ jobs:
 
   build_windows:
     runs-on: windows-latest
+    permissions:
+      contents: read
     env:
       fpc_installer_name: 'fpc_installer'
       nasm_executable_name: 'C:\Program Files\NASM\nasm.exe'
