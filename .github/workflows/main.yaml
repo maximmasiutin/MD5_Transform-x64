@@ -1,6 +1,9 @@
 ---
 name: Build
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -14,7 +17,6 @@ on:
 
 env:
   fpc_ver: '3.2.2'
-
 
 jobs:
   build_linux:
@@ -86,7 +88,7 @@ jobs:
             }
           } else {
             Write-Host "$Env:FPC_PATH exists."
-          }   
+          }
 
       - name: Install Netwide Assembler via Chocolatey
         run: |
