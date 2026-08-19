@@ -1,4 +1,5 @@
 # MD5_Transform-x64
+
 MD5 transform routine optimized for x86-64 processors written using Macro Assembler.
 
 Copyright (C) 2018-2020 Ritlabs, SRL. All rights reserved.
@@ -7,15 +8,15 @@ Copyright (C) 2020-2025 Maxim Masiutin. All rights reserved.
 
 The 64-bit version was written by Maxim Masiutin <maxim@masiutin.com>.
 
-It is based on 32-bit code by Peter Sawatzki (see below).
+The 64-bit version is based on 32-bit code by Peter Sawatzki (see below).
 
-You can compile this code using Microsoft Macro Assembler (MASM for x64),
-which is a part of Microsoft Visual Studio.
-```
+Microsoft Macro Assembler (MASM for x64), which is a part of Microsoft Visual Studio, compiles this code:
+
+```bash
 ml64.exe /c md5_64.asm
 ```
 
-You can also compile the code on Linux or Windows using Netwide Assembler (nasm) - see `md5_64_nasm.asm` for details.
+Netwide Assembler (nasm) also compiles the code on Linux or Windows; see `md5_64_nasm.asm` for details.
 
 The performance is 4.94 CPU cycles per byte (on Skylake processors).
 
@@ -29,22 +30,19 @@ This implementation follows Microsoft's x64 Application Binary Interface (ABI), 
 
 For Unix (Linux), Netwide Assembler (nasm) is used, to assemble the code for "System V AMD64 ABI" calling convention which uses RDI to pass first argument, and RSI to pass second argument. According to System V AMD64 ABI, the registers RBX, RBP and R12-R15 should be preserved by the callee (the function being called), while the other registers, including RDI and RSI, can be modified by the callee.
 
-This code is used in "The Bat!" email client:  
-https://www.ritlabs.com/en/products/thebat/
+This code is used in "The Bat!" email client: <https://www.ritlabs.com/en/products/thebat/>
 
-Additionally, there is support for GNU Assembler (GAS). You can compile the 32-bit code with GAS using `as -msyntax=intel -mnaked-reg --32 -o md5_32_gas.obj md5_32_gas.asm`. There is also a version that uses Intel Advanced Performance Extensions (Intel APX), so that it helps avoid using "ROR", and sixteen 32-bit registers are used for storing the hashed input: `EBP`, `R8d`, `R9d`, `R10d`, `R11d`, `R12d`, `R13d`, `R14d`, `R15d`, `R16d`, `R17d`, `R18d`, `R19d`, `R20d`, `R21d`, `R22d`. As such, the GAS implementation uses additional general-purpose registers (GPRs) also known as Extended GPRs (EGPRs) to implement MD5 transform routine, but doesn't use other APX features, such as three-operand instruction formats. To compile it, call `as -msyntax=intel -mnaked-reg --64 -o md5_64_gas_apx.obj md5_64_gas_apx.asm`.
+Additionally, there is support for GNU Assembler (GAS). The command `as -msyntax=intel -mnaked-reg --32 -o md5_32_gas.obj md5_32_gas.asm` compiles the 32-bit code with GAS. There is also a version that uses Intel Advanced Performance Extensions (Intel APX), so that it helps avoid using "ROR", and sixteen 32-bit registers are used for storing the hashed input: `EBP`, `R8d`, `R9d`, `R10d`, `R11d`, `R12d`, `R13d`, `R14d`, `R15d`, `R16d`, `R17d`, `R18d`, `R19d`, `R20d`, `R21d`, `R22d`. As such, the GAS implementation uses additional general-purpose registers (GPRs) also known as Extended GPRs (EGPRs) to implement MD5 transform routine, but doesn't use other APX features, such as three-operand instruction formats. The command `as -msyntax=intel -mnaked-reg --64 -o md5_64_gas_apx.obj md5_64_gas_apx.asm` compiles it.
 
-
-MD5_Transform-x64 is released under a dual license, and you may choose to use it under either the Mozilla Public License 2.0 (MPL 2.1, available from https://www.mozilla.org/en-US/MPL/2.0/) or the GNU Lesser General Public License Version 3, dated 29 June 2007 (LGPL 3, available from https://www.gnu.org/licenses/lgpl.html).
+MD5_Transform-x64 is released under a dual license: the Mozilla Public License 2.0 (MPL 2.0, available from <https://www.mozilla.org/en-US/MPL/2.0/>) or the GNU Lesser General Public License Version 3, dated 29 June 2007 (LGPL 3, available from <https://www.gnu.org/licenses/lgpl.html>).
 
 MD5_Transform-x64 is based on the following code by Peter Sawatzki.
 
 The original notice by Peter Sawatzki follows.
 
-# MD5_386.Asm
+```text
 MD5_386.Asm   -  386 optimized helper routine for calculating
                  MD Message-Digest values
-
 written 2/2/94 by
 
 Peter Sawatzki
@@ -58,3 +56,4 @@ WWW:   http://www.sawatzki.de
 
 original C Source was found in Dr. Dobbs Journal Sep 91
 MD5 algorithm from RSA Data Security, Inc.
+```
