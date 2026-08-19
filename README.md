@@ -34,18 +34,15 @@ This code is used in "The Bat!" email client: <https://www.ritlabs.com/en/produc
 
 Additionally, there is support for GNU Assembler (GAS). The command `as -msyntax=intel -mnaked-reg --32 -o md5_32_gas.obj md5_32_gas.asm` compiles the 32-bit code with GAS. There is also a version that uses Intel Advanced Performance Extensions (Intel APX), so that it helps avoid using "ROR", and sixteen 32-bit registers are used for storing the hashed input: `EBP`, `R8d`, `R9d`, `R10d`, `R11d`, `R12d`, `R13d`, `R14d`, `R15d`, `R16d`, `R17d`, `R18d`, `R19d`, `R20d`, `R21d`, `R22d`. As such, the GAS implementation uses additional general-purpose registers (GPRs) also known as Extended GPRs (EGPRs) to implement MD5 transform routine, but doesn't use other APX features, such as three-operand instruction formats. The command `as -msyntax=intel -mnaked-reg --64 -o md5_64_gas_apx.obj md5_64_gas_apx.asm` compiles it.
 
-MD5_Transform-x64 is released under a dual license: the Mozilla Public License 2.0 (MPL 2.1, available from <https://www.mozilla.org/en-US/MPL/2.0/>) or the GNU Lesser General Public License Version 3, dated 29 June 2007 (LGPL 3, available from <https://www.gnu.org/licenses/lgpl.html>).
+MD5_Transform-x64 is released under a dual license: the Mozilla Public License 2.0 (MPL 2.0, available from <https://www.mozilla.org/en-US/MPL/2.0/>) or the GNU Lesser General Public License Version 3, dated 29 June 2007 (LGPL 3, available from <https://www.gnu.org/licenses/lgpl.html>).
 
 MD5_Transform-x64 is based on the following code by Peter Sawatzki.
 
 The original notice by Peter Sawatzki follows.
 
-## MD5_386.Asm
-
 ```text
 MD5_386.Asm   -  386 optimized helper routine for calculating
                  MD Message-Digest values
-
 written 2/2/94 by
 
 Peter Sawatzki
@@ -55,6 +52,7 @@ D58091 Hagen, Germany Fed Rep
 EMail: Peter@Sawatzki.de
 EMail: 100031.3002@compuserve.com
 WWW:   http://www.sawatzki.de
+
 
 original C Source was found in Dr. Dobbs Journal Sep 91
 MD5 algorithm from RSA Data Security, Inc.

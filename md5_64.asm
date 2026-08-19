@@ -44,7 +44,7 @@
 
 ; MD5_Transform-x64 is released under a dual license,
 ; and you may choose to use it under either the
-; Mozilla Public License 2.0 (MPL 2.1, available from
+; Mozilla Public License 2.0 (MPL 2.0, available from
 ; https://www.mozilla.org/en-US/MPL/2.0/) or the
 ; GNU Lesser General Public License Version 3,
 ; dated 29 June 2007 (LGPL 3, available from
