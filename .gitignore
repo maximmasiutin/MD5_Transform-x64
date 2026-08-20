@@ -1,0 +1,22 @@
+# Assembler and compiler output. The sources here are built by hand with several
+# toolchains, so the object extensions come from all of them: NASM and the GNU
+# assembler write .obj and .o, FreePascal writes .o and .ppu, and a bare link
+# with no -o leaves a.out.
+*.obj
+*.o
+*.ppu
+*.exe
+a.out
+
+# Editor temporaries. Far Manager writes FARxxxx.tmp beside the file being
+# edited, and a numbered scratch dump is how output gets eyeballed here.
+FAR*.tmp
+1.txt
+
+# Credential-bearing tool configuration, which belongs on the machine and never
+# in the history: this file carries the token the githubapi plugin authenticates
+# with, and a commit here could not be withdrawn.
+githubapi.config.json
+
+# Local tooling metadata
+/.project/
